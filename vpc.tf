@@ -1,12 +1,12 @@
 
 resource "aws_vpc" "demo-vpc" {
-  cidr_block = var.vpc_cidr_block
+  cidr_block = var.vpc_cidr_block[0]
   tags = {
     name = "demo-vpc"
   }
 }
 resource "aws_subnet" "demo_private_subnet" {
-  cidr_block        = var.private_subnet
+  cidr_block        = var.vpc_cidr_block[1]
   vpc_id            = aws_vpc.demo-vpc.id
   availability_zone = var.availability_zone
   tags = {
@@ -14,7 +14,7 @@ resource "aws_subnet" "demo_private_subnet" {
   }
 }
 resource "aws_subnet" "demo_public_subnet" {
-  cidr_block        = var.public_subnet
+  cidr_block        = var.vpc_cidr_block[2]
   vpc_id            = aws_vpc.demo-vpc.id
   availability_zone = var.availability_zone
   tags = {
