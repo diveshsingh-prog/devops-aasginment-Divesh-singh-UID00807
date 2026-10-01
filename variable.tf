@@ -1,3 +1,24 @@
 variable "region" {
   default = "us-east-1"
 }
+variable "availability_zone" {
+  default = "us-east-1a"
+}
+
+variable "vpc_cidr_block" {
+  default = ["10.0.0.0/16", "10.0.1.0/24", "10.0.2.0/24"]
+  validation {
+    condition     = length(var.vpc_cidr_block) >= 3
+    error_message = "provide three cidr block"
+  }
+}
+variable "all_ips" {
+  default = "0.0.0.0/0"
+}
+
+variable "instance_type" {
+  default = "t3.micro"
+}
+variable "bucket_name" {
+  default = "demo-abc-123456-abc-123456"
+}
